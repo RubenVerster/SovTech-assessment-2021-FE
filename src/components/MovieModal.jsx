@@ -1,4 +1,5 @@
 import React from 'react'
+import { MovieContext } from '../context/MovieContext'
 
 function MovieModal() {
   return (
