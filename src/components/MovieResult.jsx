@@ -1,17 +1,26 @@
-import React from 'react';
+import React from 'react'
 
-const MovieResult = ({ title, episode_id }) => {
+const MovieResult = ({ title, id }) => {
   return (
-    <div key={episode_id}>
-      <h2>{title}</h2>
+    <div
+      className='m-2 p-3 d-flex flex-row justify-content-between align-items-center'
+      key={id}
+    >
+      <h2 className='me-1'>{title}</h2>
+
       <button
-        className="btn btn-info"
-        onClick={() => alert(`Details for ${title}: Movie id = ${episode_id}`)}
+        type='button'
+        class='btn btn-primary'
+        data-bs-toggle='modal'
+        data-bs-target='#exampleModal'
+        onClick={() =>
+          alert(`pass data Details for ${title}: Movie id = ${id}`)
+        }
       >
-        View More info
+        More Info
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default MovieResult;
+export default MovieResult
