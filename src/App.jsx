@@ -1,16 +1,21 @@
 import './App.css'
 // import Request from './components/Request.tsx';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import MovieResult from './components/MovieResult'
 import MovieModal from './components/MovieModal'
 
+import { MovieProvider } from './context/MovieContext'
+import { MovieContext } from './context/MovieContext'
+
 function App() {
+  const [moviesResults, setMoviesResults] = useContext(MovieContext)
+  const [movieHistory, setMovieHistory] = useContext(MovieContext)
+
   const [searchParam, setSearchParam] = useState('')
   const [error, setError] = useState(null)
   const [message, setMessage] = useState(null)
   const [loading, setLoading] = useState(null)
-  const [moviesResults, setMoviesResults] = useState([])
 
   const searchMovieWithParam = async (event) => {
     event.preventDefault()
@@ -52,9 +57,12 @@ function App() {
     setSearchParam(value)
   }
 
-  const mappedResults = moviesResults.map(({ title, episode_id }) => (
-    <MovieResult title={title} id={episode_id} />
-  ))
+  const mappedResults =
+    moviesResults !== []
+      ? moviesResults.map(({ title, episode_id }) => (
+          <MovieResult title={title} id={episode_id} />
+        ))
+      : null
 
   //API DETAILS FOR WEATHER APP
   // const getWeather = async () => {
@@ -69,67 +77,71 @@ function App() {
   // };
 
   return (
-    <div className='app-container text-center '>
-      <header className='header bg-dark pb-3 mb-5'>
-        <h1 className='text-secondary'>
-          (<span className='text-danger'>♥</span>¬
-          <span className='text-danger'>♥</span>;)
-        </h1>
-        <div className='d-flex flex-column align-items-center p-2'>
-          <form
-            className='w-100'
-            onSubmit={(event) => searchMovieWithParam(event)}
-          >
-            <div className='input-group input-field mb-3'>
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Search A Movie'
-                aria-label='Search A Movie'
-                aria-describedby='button-addon2'
-                value={searchParam}
-                onChange={(event) => updateInputField(event)}
-              />
+    <MovieProvider>
+      <div className='app-container text-center '>
+        <header className='header bg-dark pb-3 mb-5'>
+          <h1 className='text-secondary'>
+            (<span className='text-danger'>♥</span>¬
+            <span className='text-danger'>♥</span>;)
+          </h1>
+          <div className='d-flex flex-column align-items-center p-2'>
+            <form
+              className='w-100'
+              onSubmit={(event) => searchMovieWithParam(event)}
+            >
+              <div className='input-group input-field mb-3'>
+                <input
+                  type='text'
+                  className='form-control'
+                  placeholder='Search A Movie'
+                  aria-label='Search A Movie'
+                  aria-describedby='button-addon2'
+                  value={searchParam}
+                  onChange={(event) => updateInputField(event)}
+                />
 
-              <button
-                className='btn btn-outline-primary'
-                type='submit'
-                id='button-addon2'
-              >
-                Search
-              </button>
-            </div>
-          </form>
-        </div>
+                <button
+                  className='btn btn-outline-primary'
+                  type='submit'
+                  id='button-addon2'
+                >
+                  Search
+                </button>
+              </div>
+            </form>
+          </div>
 
-        {loading && <div className='text-secondary'>Checking for a movie</div>}
-        {error && <h2 className='text-danger'>{error}</h2>}
+          {loading && (
+            <div className='text-secondary'>Checking for a movie</div>
+          )}
+          {error && <h2 className='text-danger'>{error}</h2>}
 
-        {/* <button onClick={() => getWeather()} className="btn btn-warning">
+          {/* <button onClick={() => getWeather()} className="btn btn-warning">
           GET WEATHER
         </button> */}
-      </header>
+        </header>
 
-      <div className='container bg-secondary text-light'>
-        <div className='row'>
-          <div className='col-lg-6 col-xs-12'>
-            <div className='row'>
-              <div className='col-12 p-3'>
-                {message && <h2 className='text-info'>{message}</h2>}
+        <div className='container bg-secondary text-light'>
+          <div className='row'>
+            <div className='col-lg-6 col-xs-12'>
+              <div className='row'>
+                <div className='col-12 p-3'>
+                  {message && <h2 className='text-info'>{message}</h2>}
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col xs-12'>{mappedResults}</div>
               </div>
             </div>
-            <div className='row'>
-              <div className='col xs-12'>{mappedResults}</div>
+            <div className='col-lg-6 col-xs-12'>
+              <h2>Movie History</h2>
             </div>
           </div>
-          <div className='col-lg-6 col-xs-12'>
-            <h2>Movie History</h2>
-          </div>
         </div>
-      </div>
 
-      <MovieModal />
-    </div>
+        <MovieModal />
+      </div>
+    </MovieProvider>
   )
 }
 
