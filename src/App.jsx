@@ -70,7 +70,7 @@ function App() {
 
   return (
     <div className='app-container text-center '>
-      <header class='header bg-dark pb-3 mb-5'>
+      <header className='header bg-dark pb-3 mb-5'>
         <h1 className='text-secondary'>
           (<span className='text-danger'>♥</span>¬
           <span className='text-danger'>♥</span>;)
@@ -80,10 +80,10 @@ function App() {
             className='w-100'
             onSubmit={(event) => searchMovieWithParam(event)}
           >
-            <div class='input-group input-field mb-3'>
+            <div className='input-group input-field mb-3'>
               <input
                 type='text'
-                class='form-control'
+                className='form-control'
                 placeholder='Search A Movie'
                 aria-label='Search A Movie'
                 aria-describedby='button-addon2'
@@ -92,7 +92,7 @@ function App() {
               />
 
               <button
-                class='btn btn-outline-primary'
+                className='btn btn-outline-primary'
                 type='submit'
                 id='button-addon2'
               >
@@ -118,9 +118,9 @@ function App() {
                 {message && <h2 className='text-info'>{message}</h2>}
               </div>
             </div>
-            <row>
+            <div className='row'>
               <div className='col xs-12'>{mappedResults}</div>
-            </row>
+            </div>
           </div>
           <div className='col-lg-6 col-xs-12'>
             <h2>Movie History</h2>
