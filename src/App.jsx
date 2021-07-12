@@ -37,6 +37,12 @@ function App() {
       return setError('Please fill in the field to search for a movie');
     }
 
+    //Easter Egg
+    if (searchParam.toLowerCase() === 'hello there') {
+      setLoading(false);
+      return setMessageResult('General Kenobi');
+    }
+
     try {
       const response = await axios.get(
         `https://swapi.dev/api/films/?search=${searchParam}`
@@ -44,7 +50,9 @@ function App() {
       if (response.data.results.length >= 1) {
         setMessageResult('We got some results (☞ﾟヮﾟ)☞');
       } else {
-        setMessageResult('No results found... (╯°□°）╯︵ ┻━┻');
+        setMessageResult(
+          'No results found... (╯°□°）╯︵ ┻━┻ (maybe search "Hello there")'
+        );
       }
       console.log(`search results`, response.data.results);
       await setMoviesResults(response.data.results);
@@ -85,18 +93,6 @@ function App() {
     )
   );
 
-  //API DETAILS FOR WEATHER APP
-  // const getWeather = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=51.5&lon=0`
-  //     );
-  //     console.log(`weather`, response);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   return (
     <div className="app-container text-center ">
       <header className="header bg-dark pb-3 mb-5">
@@ -134,12 +130,8 @@ function App() {
           </form>
         </div>
 
-        {loading && <div className="text-secondary">Checking for a movie</div>}
+        {loading && <h2 className="text-secondary">Searching the Cosmos</h2>}
         {error && <h2 className="text-danger">{error}</h2>}
-
-        {/* <button onClick={() => getWeather()} className="btn btn-warning">
-          GET WEATHER
-        </button> */}
         {messageResult && <h2 className="text-primary">{messageResult}</h2>}
       </header>
 
@@ -154,20 +146,18 @@ function App() {
           </div>
           <div className="col-lg-6 col-xs-12">
             <h2>View History</h2>
-            {movieHistory.length > 0 ? (
+            {movieHistory.length > 0 && (
               <button
                 class="btn btn-danger mb-2"
                 onClick={() => setMovieHistory([])}
               >
-                {' '}
                 Clear History
               </button>
-            ) : null}
+            )}
 
             <div>
-              {movieHistory.length < 1 ? 'No Search history' : mappedHistory}
+              {movieHistory.length < 1 ? 'No Search History' : mappedHistory}
             </div>
-            <div></div>
           </div>
         </div>
       </div>
