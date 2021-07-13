@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { MovieContext } from '../context/MovieContext';
 
-function MovieModal() {
-  const [selectedMovie, setSelectedMovie] = useContext(MovieContext);
+const MovieModal: React.FC = () => {
+  const [selectedMovie, setSelectedMovie]: any = useContext(MovieContext);
 
   const clearState = () => {
     setSelectedMovie({
@@ -21,7 +21,7 @@ function MovieModal() {
     <div
       className="modal fade"
       id="exampleModal"
-      tabIndex="-1"
+      tabIndex={-1}
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -33,7 +33,6 @@ function MovieModal() {
             </h5>
 
             <div
-              type="button"
               className="btn-close"
               // data-bs-dismiss="modal"
               data-bs-toggle="modal"
@@ -50,7 +49,6 @@ function MovieModal() {
 
           <div className="modal-footer">
             <div
-              type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
               onClick={() => clearState()}
@@ -62,6 +60,6 @@ function MovieModal() {
       </div>
     </div>
   );
-}
+};
 
 export default MovieModal;

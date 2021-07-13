@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { MovieContext } from '../context/MovieContext';
 // { title, id, director, releaseDate }
-const MovieHistoryItem = (props) => {
-  const [selectedMovie, setSelectedMovie] = useContext(MovieContext);
+const MovieHistoryItem = (props: any) => {
+  const [selectedMovie, setSelectedMovie]: any = useContext(MovieContext);
   console.log(`hist props`, props);
 
   return (

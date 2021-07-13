@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { MovieContext } from '../context/MovieContext';
-
+// @ts-ignore
 const MovieItem = ({ title, id, director, releaseDate }) => {
+  // @ts-ignore
   const [selectedMovie, setSelectedMovie, movieHistory, setMovieHistory] =
     useContext(MovieContext);
 
@@ -11,6 +12,7 @@ const MovieItem = ({ title, id, director, releaseDate }) => {
      * This poesse setSelectedMovie is the culprit -_-
      **/
     setSelectedMovie({ title, id, director, releaseDate });
+    // @ts-ignore
     setMovieHistory((movieHistory) => [
       ...movieHistory,
       { title: title, id: id, director: director, releaseDate: releaseDate },

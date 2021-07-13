@@ -1,6 +1,5 @@
 import './App.css';
-// import Request from './components/Request.tsx';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import MovieItem from './components/MovieItem';
 import MovieHistoryItem from './components/MovieHistoryItem';
@@ -19,13 +18,15 @@ function App() {
     setError,
     messageResult,
     setMessageResult,
-  ] = useContext(MovieContext);
+  ]: any = useContext(MovieContext);
 
-  const [searchParam, setSearchParam] = useState('');
+  const [searchParam, setSearchParam] = useState<string>('');
 
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const searchMovieWithParam = async (event) => {
+  const searchMovieWithParam = async (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
     event.preventDefault();
     setError(null);
     setMessageResult(null);
@@ -65,33 +66,32 @@ function App() {
     setLoading(false);
   };
 
-  const updateInputField = ({ target }) => {
-    let { value } = target;
+  const updateInputField = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let { value } = event.target;
     setError(null);
     setSearchParam(value);
   };
 
   const mappedResults =
     moviesResults.length > 0 &&
-    moviesResults.map(({ title, episode_id, director, release_date }) => (
+    // @ts-ignore
+    moviesResults.map((movie) => (
       <MovieItem
-        title={title}
-        id={episode_id}
-        director={director}
-        releaseDate={release_date}
+        title={movie.title}
+        id={movie.episode_id}
+        director={movie.director}
+        releaseDate={movie.release_date}
       />
     ));
 
-  const mappedHistory = movieHistory.map(
-    ({ title, id, director, releaseDate }) => (
-      <MovieHistoryItem
-        title={title}
-        id={id}
-        director={director}
-        releaseDate={releaseDate}
-      />
-    )
-  );
+  const mappedHistory = movieHistory.map((histMovie: any) => (
+    <MovieHistoryItem
+      title={histMovie.title}
+      id={histMovie.id}
+      director={histMovie.director}
+      releaseDate={histMovie.releaseDate}
+    />
+  ));
 
   return (
     <div className="app-container text-center ">
@@ -106,6 +106,8 @@ function App() {
         <div className="d-flex flex-column align-items-center p-2">
           <form
             className="w-100"
+            // @ts-ignore
+
             onSubmit={(event) => searchMovieWithParam(event)}
           >
             <div className="input-group input-field mb-3">
@@ -148,7 +150,7 @@ function App() {
             <h2>View History</h2>
             {movieHistory.length > 0 && (
               <button
-                class="btn btn-danger mb-2"
+                className="btn btn-danger mb-2"
                 onClick={() => setMovieHistory([])}
               >
                 Clear History
