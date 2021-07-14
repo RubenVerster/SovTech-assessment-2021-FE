@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/SovTech-assessment-2021-FE/static/css/main.ea1455b2.chunk.css",
+    "main.js": "/SovTech-assessment-2021-FE/static/js/main.d91463f1.chunk.js",
+    "main.js.map": "/SovTech-assessment-2021-FE/static/js/main.d91463f1.chunk.js.map",
+    "runtime-main.js": "/SovTech-assessment-2021-FE/static/js/runtime-main.175d4dcc.js",
+    "runtime-main.js.map": "/SovTech-assessment-2021-FE/static/js/runtime-main.175d4dcc.js.map",
+    "static/js/2.b63ff921.chunk.js": "/SovTech-assessment-2021-FE/static/js/2.b63ff921.chunk.js",
+    "static/js/2.b63ff921.chunk.js.map": "/SovTech-assessment-2021-FE/static/js/2.b63ff921.chunk.js.map",
+    "index.html": "/SovTech-assessment-2021-FE/index.html",
+    "static/css/main.ea1455b2.chunk.css.map": "/SovTech-assessment-2021-FE/static/css/main.ea1455b2.chunk.css.map",
+    "static/js/2.b63ff921.chunk.js.LICENSE.txt": "/SovTech-assessment-2021-FE/static/js/2.b63ff921.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.175d4dcc.js",
+    "static/js/2.b63ff921.chunk.js",
+    "static/css/main.ea1455b2.chunk.css",
+    "static/js/main.d91463f1.chunk.js"
+  ]
+}
